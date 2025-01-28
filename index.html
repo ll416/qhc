@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>青韵瓷坊 - 传承千年青花瓷文化</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/slider.css">
+    <style>
+        /* 特色板块样式 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            padding: 60px 0;
+        }
+
+        .feature-card {
+            background: var(--secondary-color);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: var(--secondary-color);
+        }
+
+        /* 展品展示样式 */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 3/4;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: var(--secondary-color);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-info {
+            transform: translateY(0);
+        }
+
+        /* 文化介绍样式 */
+        .culture-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            padding: 60px 0;
+        }
+
+        .culture-image {
+            position: relative;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .culture-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .culture-content {
+            padding: 40px;
+            background: var(--secondary-color);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 新闻动态样式 */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .news-card {
+            background: var(--secondary-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover .news-image img {
+            transform: scale(1.1);
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-date {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .footer-section p {
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid,
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .culture-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* 视频展示区样式 */
+.video-section {
+    padding: 60px 0;
+    background: #f8f8f8;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.video-container video {
+    width: 100%;
+    display: block;
+}
+
+/* 音乐播放��样式 */
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.music-player.minimized {
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.music-toggle {
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
+/* 评论区样式 */
+.comments-section {
+    padding: 60px 0;
+}
+
+.comment-form {
+    margin-bottom: 40px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.comment-form textarea {
+    width: 100%;
+    height: 100px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.comment-item {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-date {
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.comment-content {
+    margin-bottom: 15px;
+}
+
+.comment-actions {
+    display: flex;
+    gap: 15px;
+    color: var(--text-light);
+}
+
+.comment-action {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.comment-action:hover {
+    color: var(--primary-color);
+}
+
+/* 社交分享样式 */
+.share-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.share-button {
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: transform 0.3s ease;
+}
+
+.share-button:hover {
+    transform: translateY(-2px);
+}
+
+.share-button.weixin {
+    background: #07c160;
+}
+S
+.share-button.weibo {
+    background: #e6162d;
+}
+
+.share-button.douyin {
+    background: #000000;
+}
+
+.share-button.qzone {
+    background: #fdbe3d;
+}
+.comment-form button.btn {
+            display: block;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <img src="img/logo.jpg" alt="青韵瓷坊">
+                <span class="logo-text">青韵瓷坊</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html" class="nav-item">首页</a>
+                <div class="nav-item has-submenu">
+                    青花历史
+                    <div class="submenu">
+                        <a href="history.html#yuan" class="submenu-item">元代青花</a>
+                        <a href="history.html#ming" class="submenu-item">明代青花</a>
+                        <a href="history.html#qing" class="submenu-item">清代青花</a>
+                    </div>
+                </div>
+                <div class="nav-item has-submenu">
+                    艺术特色
+                    <div class="submenu">
+                        <a href="features.html#pattern" class="submenu-item">纹饰特点</a>
+                        <a href="features.html#glaze" class="submenu-item">釉色工艺</a>
+                        <a href="features.html#style" class="submenu-item">造型风格</a>
+                    </div>
+                </div>
+                <div class="nav-item has-submenu">
+                    精品展示
+                    <div class="submenu">
+                        <a href="exhibition.html#classic" class="submenu-item">传世名品</a>
+                        <a href="exhibition.html#modern" class="submenu-item">现代作品</a>
+                        <a href="exhibition.html#collection" class="submenu-item">收藏鉴赏</a>
+                    </div>
+                </div>
+                <div class="nav-item has-submenu">
+                    制作工艺
+                    <div class="submenu">
+                        <a href="crafts.html#process" class="submenu-item">制瓷流程</a>
+                        <a href="crafts.html#painting" class="submenu-item">彩绘技法</a>
+                        <a href="crafts.html#firing" class="submenu-item">烧制工艺</a>
+                    </div>
+                </div>
+                <div class="nav-item has-submenu">
+          会员中心
+                   <div class="submenu">
+                   	<a href="#" class="submenu-item">登录</a>
+                        <a href="#" class="submenu-item">注册</a>
+                        <a href="virtual.html" class="submenu-item">我的个人中心</a>
+                   
+                   </div>
+                   </div>
+            </nav>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 轮播图 -->
+    <div class="slider">
+        <div class="slider-container">
+            <div class="slide active">
+                <img src="img/1.jpg" alt="青花瓷展品1">
+                <div class="slide-content">
+                    <h2 class="slide-title">传世名品</h2>
+                    <p class="slide-description">探索千年青花瓷的艺术魅力</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="img/2.jpg" alt="青花瓷展品2">
+                <div class="slide-content">
+                    <h2 class="slide-title">匠心传承</h2>
+                    <p class="slide-description">传统与现代的完美融合</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="img/3.jpg" alt="青花瓷展品3">
+                <div class="slide-content">
+                    <h2 class="slide-title">艺术臻品</h2>
+                    <p class="slide-description">领略东方瓷器的独特魅力</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="img/4.jpg" alt="青花瓷展品4">
+                <div class="slide-content">
+                    <h2 class="slide-title">文化传承</h2>
+                    <p class="slide-description">感受中国传统文化的深厚底蕴</p>
+                </div>
+            </div>
+        </div>
+        <div class="slider-nav">
+            <div class="slider-nav-item active"></div>
+            <div class="slider-nav-item"></div>
+            <div class="slider-nav-item"></div>
+            <div class="slider-nav-item"></div>
+        </div>
+        <div class="slider-arrow prev"></div>
+        <div class="slider-arrow next"></div>
+    </div>
+
+    <!-- 主体内容 -->
+    <main class="container">
+        <!-- 特色板块 -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🏺</div>
+                <h3>匠心传承</h3>
+                <p>千年技艺，代代相传</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>艺术创新</h3>
+                <p>传统与现代的完美融合</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>文化积淀</h3>
+                <p>深厚历史，底蕴丰富</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌏</div>
+                <h3>世界影响</h3>
+                <p>连接东西，跨越古今</p>
+            </div>
+        </div>
+
+        <!-- 精品展示 -->
+        <section>
+            <div class="section-title">
+                <h2>精品展示</h2>
+                <p>匠心独运，再现经典</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="img/5.jpg" alt="青花瓷器">
+                    <div class="product-info">
+                        <h3>青花山水纹瓶</h3>
+                        <p>传统山水与现代审美的完美结合</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="img/6.jpg" alt="青花瓷器">
+                    <div class="product-info">
+                        <h3>青花缠枝莲纹盘</h3>
+                        <p>古典纹样的新时代诠释</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="img/7.jpg" alt="青花瓷器">
+                    <div class="product-info">
+                        <h3>青花龙纹尊</h3>
+                        <p>传统龙纹的创新演绎</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 文化介绍 -->
+        <section class="culture-section">
+            <div class="culture-image">
+                <img src="img/8.jpg" alt="文化展示">
+            </div>
+            <div class="culture-content">
+                <h2>青花文化</h2>
+                <p>青花瓷是中国瓷器中最具代表性的品种之一，以其独特的青花装饰和精湛的制作工艺闻名于世。它不仅是一种工艺品，更是中国传统文化的重要载体。</p>
+                <a href="history.html" class="btn mt-3">了解更多</a>
+            </div>
+        </section>
+
+        <!-- 新闻动态 -->
+        <section>
+            <div class="section-title">
+                <h2>新闻动态</h2>
+                <p>最新资讯，实时更新</p>
+            </div>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="img/new.jpg" alt="新闻图片">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">2024-01-15</div>
+                        <h3>2024青花瓷艺术展览开幕</h3>
+                        <p>展现传统与现代交融的青花瓷艺术魅力，汇聚海内外珍品。</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="img/new1.jpg" alt="新闻图片">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">2024-01-10</div>
+                        <h3>非遗传承人培养计划启动</h3>
+                        <p>助力青花瓷技艺的传承与发展，培养新一代青花瓷艺术大师。</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="img/news2.jpg" alt="新闻图片">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">2024-01-05</div>
+                        <h3>青花瓷数字博物馆上线</h3>
+                        <p>运用现代科技，让更多人了解青花瓷文化，突破时空限制。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <section class="video-section">
+    <div class="section-title">
+        <h2>青花瓷简单介绍</h2>
+        <p>探索传统青花瓷器</p>
+    </div>
+    <div class="video-container">
+        <video id="craft-video" controls poster="img/1.jpg">
+            <source src="videos/crafting-process.mp4" type="video/mp4">
+            您的浏览器不支持视频播放。
+        </video>
+    </div>
+</section>
+
+<!-- 评论区 -->
+<section class="comments-section">
+    <div class="section-title">
+        <h2>用户评论</h2>
+        <p>分享您的观点和建议</p>
+    </div>
+    <div class="comment-form">
+        <textarea placeholder="请输入您的评论..." required></textarea>
+        <button class="btn" >发表评论</button>
+    </div>
+    <div class="comment-list">
+        <div class="comment-item">
+            <div class="comment-header">
+                <div class="comment-user">
+                    <img src="img/users.jpg" alt="用户头像" class="user-avatar">
+                    <div>
+                        <h4>Www..</h4>
+                        <div class="comment-date">2024-12-15</div>
+                    </div>
+                </div>
+            </div>
+            <div class="comment-content">
+                很棒的展示！让我对青花瓷文化有了更深的了解。
+            </div>
+            <div class="comment-actions">
+                <span class="comment-action"><i class="like-icon"></i> 点赞 (20)</span>
+                <span class="comment-action"><i class="reply-icon"></i> 回复</span>
+                
+            </div>
+        </div>
+        <!-- 更多评论项... -->
+        <div class="comment-item">
+            <div class="comment-header">
+                <div class="comment-user">
+                    <img src="img/users1.jpg" alt="用户头像" class="user-avatar">
+                    <div>
+                        <h4>光头弱</h4>
+                        <div class="comment-date">2024-12-15</div>
+                    </div>
+                </div>
+            </div>
+            <div class="comment-content">
+                好美的青花瓷，大家快来看太棒了！！！！
+            </div>
+            <div class="comment-actions">
+                <span class="comment-action"><i class="like-icon"></i> 点赞 (99+)</span>
+                <span class="comment-action"><i class="reply-icon"></i> 回复</span>
+                
+            </div>
+        </div>
+        <div class="comment-item">
+            <div class="comment-header">
+                <div class="comment-user">
+                    <img src="img/users2.jpg" alt="用户头像" class="user-avatar">
+                    <div>
+                        <h4>Noragami</h4>
+                        <div class="comment-date">2024-12-15</div>
+                    </div>
+                </div>
+            </div>
+            <div class="comment-content">
+               受不了忍不住了太好看了！！！！
+            </div>
+            <div class="comment-actions">
+                <span class="comment-action"><i class="like-icon"></i> 点赞 (999)</span>
+                <span class="comment-action"><i class="reply-icon"></i> 回复</span>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 背景音乐播放器 -->
+<div class="music-player" id="musicPlayer">
+    <button class="music-toggle">▶️</button>
+    <audio id="bgMusic" loop>
+        <source src="audio/background-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <span class="music-title">古典背景音乐</span>
+</div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>关于我们</h3>
+                <p>青韵瓷坊致力于传承和发展中国青花瓷文化，通过艺术创新和技术革新，让传统文化焕发新生。</p>
+                <div class="social-links">
+                    <a href="#" title="微信">微信</a>
+                    <a href="#" title="微博">微博</a>
+                    <a href="#" title="抖音">抖音</a>
+                    <a href="#" title="小红书">小红书</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>快速链接</h3>
+                <p><a style="text-decoration:none;color:white;" href="history.html">青花历史</a></p>
+                <p><a style="text-decoration:none;color:white;"href="features.html">艺术特色</a></p>
+                <p><a style="text-decoration:none;color:white;"href="exhibition.html">精品展示</a></p>
+                <p><a style="text-decoration:none;color:white;"href="crafts.html">制作工艺</a></p>
+                <p><a style="text-decoration:none;color:white;"href="virtual.html">会员中心</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>参观信息</h3>
+                <p>地址：XX省XX市XX区XX街道</p>
+                <p>电话：123-4567-8900</p>
+                <p>邮箱：info@qingyuncifang.com</p>
+                <p>开放时间：周二至周日 9:00-17:00</p>
+            </div>
+            <div class="footer-section">
+                <h3>订阅资讯</h3>
+                <p>订阅我们的新闻，获取最新展览和活动信息。</p>
+                <form class="subscribe-form mt-3">
+                    <input type="email" placeholder="请输入您的邮箱" required>
+                    <button type="submit" class="btn">订阅</button>
+                </form>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2024 青韵瓷坊 版权所有</p>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <div class="back-to-top">返回顶部</div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 轮播图功能
+            const slider = document.querySelector('.slider-container');
+            const slides = document.querySelectorAll('.slide');
+            const navItems = document.querySelectorAll('.slider-nav-item');
+            const prevBtn = document.querySelector('.slider-arrow.prev');
+            const nextBtn = document.querySelector('.slider-arrow.next');
+            let currentSlide = 0;
+            let interval;
+
+            function updateSlider() {
+                slider.style.transform = `translateX(-${currentSlide * 25}%)`;
+                document.querySelector('.slide.active').classList.remove('active');
+                slides[currentSlide].classList.add('active');
+                document.querySelector('.slider-nav-item.active').classList.remove('active');
+                navItems[currentSlide].classList.add('active');
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateSlider();
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                updateSlider();
+            }
+
+            // 自动播放
+            function startAutoPlay() {
+                interval = setInterval(nextSlide, 5000);
+            }
+
+            function stopAutoPlay() {
+                clearInterval(interval);
+            }
+
+            // 事件监听
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                stopAutoPlay();
+                startAutoPlay();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                stopAutoPlay();
+                startAutoPlay();
+            });
+
+            navItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    currentSlide = index;
+                    updateSlider();
+                    stopAutoPlay();
+                    startAutoPlay();
+                });
+            });
+
+            slider.addEventListener('mouseenter', stopAutoPlay);
+            slider.addEventListener('mouseleave', startAutoPlay);
+
+            startAutoPlay();
+
+            // 移动端菜单
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('.nav');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                nav.classList.toggle('active');
+                mobileMenuBtn.classList.toggle('active');
+            });
+
+            // 返回顶部按钮
+            const backToTop = document.querySelector('.back-to-top');
+
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // 滚动动画
+            const scrollElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            });
+
+            scrollElements.forEach(element => {
+                observer.observe(element);
+            });
+       const bgMusic = document.getElementById('bgMusic');
+    const musicToggle = document.querySelector('.music-toggle');
+    let isMusicPlaying = false;
+
+    function toggleMusic() {
+        if (isMusicPlaying) {
+            bgMusic.pause();
+            musicToggle.textContent = '▶️'; // Change to play icon
+        } else {
+            bgMusic.play().then(() => {
+                musicToggle.textContent = '⏸️'; // Change to pause icon
+            }).catch(error => {
+                console.error('Playback failed:', error);
+            });
+        }
+        isMusicPlaying =!isMusicPlaying;
+    }
+
+    // 新增代码，页面加载完成后直接调用toggleMusic函数来播放音乐
+    toggleMusic();
+
+    musicToggle.addEventListener('click', toggleMusic);
+        
+        });
+    </script>
+</body>
+</html>
